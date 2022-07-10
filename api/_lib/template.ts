@@ -79,6 +79,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo {
+        object-fit: cover;
         margin: 0 26px;
         border-radius: 50%;
         border: 4px solid #1498D5;
@@ -166,12 +167,12 @@ export function getHtml(parsedReq: ParsedRequest) {
     </html>`;
 }
 
-function getImage(src: string, width = "auto", height = "400") {
+function getImage(src: string, width = "400", height = "400") {
     return `<img
         class="logo"
         alt="Generated Image"
         src="${sanitizeHtml(src)}"
-        width="${sanitizeHtml(width)}"
+        width="${sanitizeHtml(width)}"n
         height="${sanitizeHtml(height)}"
     />`;
 }
