@@ -1,25 +1,30 @@
-
-import { readFileSync } from 'fs';
-import { marked } from 'marked';
-import { sanitizeHtml } from './sanitizer';
-import { ParsedRequest } from './types';
-const twemoji = require('twemoji');
-const twOptions = { folder: 'svg', ext: '.svg' };
+import { readFileSync } from "fs";
+import { marked } from "marked";
+import { sanitizeHtml } from "./sanitizer";
+import { ParsedRequest } from "./types";
+const twemoji = require("twemoji");
+const twOptions = { folder: "svg", ext: ".svg" };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
-const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
+const rglr = readFileSync(
+    `${__dirname}/../_fonts/Inter-Regular.woff2`
+).toString("base64");
+const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString(
+    "base64"
+);
+const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
+    "base64"
+);
 
 function getCss(theme: string, fontSize: string) {
-    let background = 'white';
-    let foreground = 'black';
-    let radial = 'lightgray';
+    let background = "white";
+    let foreground = "black";
+    let radial = "lightgray";
 
-    if (theme === 'dark') {
-        background = 'black';
-        foreground = 'white';
-        radial = 'dimgray';
+    if (theme === "dark") {
+        background = "black";
+        foreground = "white";
+        radial = "dimgray";
     }
     return `
     @font-face {
@@ -74,7 +79,9 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .logo {
-        margin: 0 75px;
+        margin: 0 26px;
+        border-radius: 50%;
+        border: 4px solid #1498D5;
     }
 
     .plus {
@@ -83,9 +90,9 @@ function getCss(theme: string, fontSize: string) {
         font-size: 100px;
     }
 
-    .spacer {
-        margin: 150px;
-    }
+    // .spacer {
+    //     margin: 150px;
+    // }
 
     .emoji {
         height: 1em;
@@ -94,12 +101,36 @@ function getCss(theme: string, fontSize: string) {
         vertical-align: -0.1em;
     }
     
-    .heading {
+    .title {
         font-family: 'Inter', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
-        font-style: normal;
+        font-style: bold;
         color: ${foreground};
-        line-height: 1.8;
+    }
+
+    .display-full {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .flex-row {
+        flex-direction: row;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+    
+    .odds-logo {
+        top: 4em;
+        right: 4em;
+        position: absolute;
     }`;
 }
 
@@ -114,33 +145,37 @@ export function getHtml(parsedReq: ParsedRequest) {
             ${getCss(theme, fontSize)}
         </style>
         <body>
-            <div>
-                <div class="spacer">
+            <div class="flex flex-column display-full">
                 <div class="logo-wrapper">
-                    ${images.map((img, i) =>
-                        getPlusSign(i) + getImage(img, widths[i], heights[i])
-                    ).join('')}
+                    ${images
+                        .map(
+                            (img, i) =>
+                                getPlusSign(i) +
+                                getImage(img, widths[i], heights[i])
+                        )
+                        .join("")}
                 </div>
-                <div class="spacer">
-                <div class="heading">${emojify(
-                    md ? marked(text) : sanitizeHtml(text)
-                )}
+                <div class="title">
+                    ${emojify(md ? marked(text) : sanitizeHtml(text))}
                 </div>
+            </div>
+            <div class="odds-logo">
+                <img alt="Generated Image" src="https://phanx.ga/asset/Odds-Logo.svg" width="auto" height="120" />
             </div>
         </body>
     </html>`;
 }
 
-function getImage(src: string, width ='auto', height = '225') {
+function getImage(src: string, width = "auto", height = "400") {
     return `<img
         class="logo"
         alt="Generated Image"
         src="${sanitizeHtml(src)}"
         width="${sanitizeHtml(width)}"
         height="${sanitizeHtml(height)}"
-    />`
+    />`;
 }
 
 function getPlusSign(i: number) {
-    return i === 0 ? '' : '<div class="plus">X</div>';
+    return i === 0 ? "" : '<div class="plus">X</div>';
 }
