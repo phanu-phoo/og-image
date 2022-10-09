@@ -164,7 +164,7 @@ const markdownOptions: DropdownOption[] = [
 ];
 
 const imageLightOptions: DropdownOption[] = [
-    { text: "Odds", value: "https://phanx-web-dev.web.app/asset/taliw.jpg" },
+    { text: "Odds", value: "https://phanx-web-dev.web.app/asset/Odds.png" },
     {
         text: "Vercel",
         value: "https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg",
@@ -180,7 +180,7 @@ const imageLightOptions: DropdownOption[] = [
 ];
 
 const imageDarkOptions: DropdownOption[] = [
-    { text: "Odds", value: "https://phanx-web-dev.web.app/asset/taliw.jpg" },
+    { text: "Odds", value: "https://phanx-web-dev.web.app/asset/Odds.png" },
     {
         text: "Vercel",
         value: "https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-white.svg",
