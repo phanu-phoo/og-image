@@ -60,8 +60,8 @@ function getDefaultImages(images: string[], theme: Theme): string[] {
 
     const defaultImage =
         theme === "light"
-            ? "https://phanx.ga/asset/Odds-Logo.svg"
-            : "https://phanx.ga/asset/Odds-Logo.svg";
+            ? "https://phanx-web-dev.web.app/asset/Odds-Logo.svg"
+            : "https://phanx-web-dev.web.app/asset/Odds-Logo.svg";
 
     if (!images || !images[0]) {
         return [defaultImage];

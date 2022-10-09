@@ -161,7 +161,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                 </div>
             </div>
             <div class="odds-logo">
-                <img alt="Generated Image" src="https://phanx.ga/asset/Odds-Logo.svg" width="auto" height="120" />
+                <img alt="Generated Image" src="https://phanx-web-dev.web.app/asset/Odds-Logo.svg" width="auto" height="120" />
             </div>
         </body>
     </html>`;
